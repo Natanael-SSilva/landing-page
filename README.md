@@ -5,7 +5,7 @@
 
 > Uma landing page moderna, responsiva e de alta performance para desenvolvedores de software, projetada para apresentar habilidades, exibir projetos e capturar leads de forma eficaz.
 
-**[➡️ Ver Demonstração Ao Vivo](https://[natanaelsilva.com.br].com)** _(substitua este link após o deploy)_
+**[➡️ Ver Demonstração Ao Vivo](https://[natanaelsilva].com.br)** _(substitua este link após o deploy)_
 
 ---
 
