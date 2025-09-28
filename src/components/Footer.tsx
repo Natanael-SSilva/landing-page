@@ -13,21 +13,21 @@ export function Footer() {
 
         {/* Aviso de Copyright */}
         <p className="text-sm text-muted-foreground">
-          &copy; {currentYear} Seu Nome. Todos os direitos reservados.
+          &copy; {currentYear} Natanael S. Silva. Todos os direitos reservados.
         </p>
 
         {/* Links para Redes Sociais */}
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="icon">
             {/* Lembre-se de atualizar com o link do seu GitHub */}
-            <Link href="https://github.com/seu-usuario" target="_blank">
+            <Link href="https://github.com/Natanael-SSilva" target="_blank">
               <Github className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Link>
           </Button>
           <Button asChild variant="ghost" size="icon">
             {/* Lembre-se de atualizar com o link do seu LinkedIn */}
-            <Link href="https://linkedin.com/in/seu-usuario" target="_blank">
+            <Link href="https://linkedin.com/in/natanael-santos-274709223" target="_blank">
               <Linkedin className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </Link>

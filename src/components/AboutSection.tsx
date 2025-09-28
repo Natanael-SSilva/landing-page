@@ -36,7 +36,7 @@ export function AboutSection() {
               <p>
                 Olá! Sou um desenvolvedor apaixonado por criar soluções que não apenas
                 funcionam bem, mas que também proporcionam uma experiência de usuário
-                excepcional. Minha jornada na programação começou [ano], e desde então,
+                excepcional. Minha jornada na programação começou em 2020, e desde então,
                 tenho me dedicado a aprender e aplicar as melhores tecnologias do
                 mercado.
               </p>

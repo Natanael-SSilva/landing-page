@@ -15,7 +15,7 @@ const fontSans = FontSans({
 
 // Metadados do site para SEO
 export const metadata: Metadata = {
-  title: "Seu Nome | Desenvolvedor Full-Stack",
+  title: "Natanael S. Silva | Desenvolvedor Full-Stack",
   description: "Landing page profissional para desenvolvedor de software, construída com Next.js e Shadcn/UI.",
 };
 
