@@ -1,22 +1,27 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google"; // Importando a fonte com um alias
+import { Inter as FontSans, Fira_Code as FontMono } from "next/font/google";
 import "./globals.css";
 
-import { cn } from "@/lib/utils"; // Utilitário para mesclar classes do Tailwind
-import { Navbar } from "@/components/Navbar";
+import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
+import { Footer } from "@/components/Footer";
+import AuthProvider from './providers'; // Renomeamos para AuthProvider
 
-// Configuração da fonte padrão, seguindo o padrão do Shadcn
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-// Metadados do site para SEO
+const fontMono = FontMono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
+});
+
 export const metadata: Metadata = {
-  title: "Natanael S. Silva | Desenvolvedor Full-Stack",
-  description: "Landing page profissional para desenvolvedor de software, construída com Next.js e Shadcn/UI.",
+  title: "Seu Nome | Desenvolvedor Full-Stack & Blog",
+  description: "Landing page profissional e blog pessoal de um desenvolvedor de software.",
 };
 
 export default function RootLayout({
@@ -25,18 +30,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Forçando o tema escuro e suprimindo avisos de hidratação
     <html lang="pt-BR" className="dark" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
+          fontMono.variable
         )}
       >
-        <Navbar />
-        <main>{children}</main> {/* Conteúdo da página (page.tsx) */}
-        <Toaster /> {/* Componente que renderiza as notificações */}
-        {/* O Footer será adicionado aqui */}
+        <AuthProvider>
+          <div className="relative flex min-h-dvh flex-col">
+            {/* O Navbar NÃO fica mais aqui */}
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <Toaster />
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

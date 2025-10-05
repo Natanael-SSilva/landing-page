@@ -1,0 +1,65 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enum para definir os papéis (roles) dos usuários
+enum Role {
+  USER
+  ADMIN
+}
+
+// Modelo para a tabela de Usuários
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  name      String?
+  role      Role       @default(USER)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  posts     Post[]     // Um usuário pode ter vários posts
+  comments  Comment[]  // Um usuário pode ter vários comentários
+}
+
+// Modelo para a tabela de Posts do Blog
+model Post {
+  id          String     @id @default(cuid())
+  title       String
+  slug        String     @unique // URL amigável para o post
+  content     String
+  imageUrl    String?
+  published   Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  author      User       @relation(fields: [authorId], references: [id])
+  authorId    String
+  comments    Comment[]  // Um post pode ter vários comentários
+}
+
+// Modelo para a tabela de Comentários
+model Comment {
+  id        String     @id @default(cuid())
+  text      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  // Relação com o autor do comentário
+  author    User       @relation(fields: [authorId], references: [id])
+  authorId  String
+
+  // Relação com o post onde o comentário foi feito
+  post      Post       @relation(fields: [postId], references: [id])
+  postId    String
+
+  // Relação para respostas (comentários aninhados)
+  parent    Comment?   @relation("Replies", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId  String?
+  replies   Comment[]  @relation("Replies")
+}
