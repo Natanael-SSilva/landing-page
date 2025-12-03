@@ -1,22 +1,19 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Inter as FontSans, Fira_Code as FontMono } from "next/font/google";
+import { Inter } from "next/font/google"; // Importação simplificada
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
-import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "./ThemeProvider";
+import AuthProvider from "./providers";
+import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import AuthProvider from './providers'; // Renomeamos para AuthProvider
+import { Toaster } from "@/components/ui/toaster";
 
-const fontSans = FontSans({
+// Configuração correta da fonte
+const fontSans = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const fontMono = FontMono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-mono",
+  variable: "--font-sans", // A variável é definida aqui
 });
 
 export const metadata: Metadata = {
@@ -24,28 +21,30 @@ export const metadata: Metadata = {
   description: "Landing page profissional e blog pessoal de um desenvolvedor de software.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className="dark" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-          fontMono.variable
+          fontSans.variable // Agora o TypeScript reconhece a propriedade '.variable'
         )}
       >
-        <AuthProvider>
-          <div className="relative flex min-h-dvh flex-col">
-            {/* O Navbar NÃO fica mais aqui */}
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <Toaster />
-          </div>
-        </AuthProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider>
+            <div className="relative flex min-h-dvh flex-col">
+              {/* O Navbar agora vai no layout do grupo (landing) */}
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <Toaster />
+            </div>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

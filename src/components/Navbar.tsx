@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle'; // 1. Importando o componente de alternância de tema
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,7 +36,7 @@ export function Navbar() {
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         {/* Logo/Nome */}
         <Link href="/" className="text-2xl font-bold text-foreground">
-          Natanael S. Silva
+          Seu Nome
         </Link>
 
         {/* Navegação para Desktop */}
@@ -49,14 +50,15 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
-          {/* O botão "Blog" adicionado, sempre aponta para /blog */}
           <Link href="/blog">
             <Button variant="outline">Blog</Button>
           </Link>
-          {/* O botão "Contato" original */}
           <Link href="#contact">
             <Button>Contato</Button>
           </Link>
+
+          {/* 2. Adicionando o botão de alternância de tema */}
+          <ThemeToggle />
         </nav>
 
         {/* Botão do Menu Mobile */}
@@ -87,6 +89,11 @@ export function Navbar() {
             <Link href="#contact" className="w-full">
               <Button className="w-full" onClick={() => setIsMenuOpen(false)}>Contato</Button>
             </Link>
+            
+            {/* 3. Adicionando o botão de alternância de tema também no menu mobile */}
+            <div className="pt-4">
+              <ThemeToggle />
+            </div>
           </nav>
         </div>
       )}

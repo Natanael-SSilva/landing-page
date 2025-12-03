@@ -21,6 +21,7 @@ model User {
   email     String     @unique
   password  String
   name      String?
+  image     String?
   role      Role       @default(USER)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -49,6 +50,7 @@ model Comment {
   text      String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  isPinned  Boolean    @default(false)
 
   // Relação com o autor do comentário
   author    User       @relation(fields: [authorId], references: [id])
